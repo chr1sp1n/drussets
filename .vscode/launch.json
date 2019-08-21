@@ -7,9 +7,30 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
-      "program": "${workspaceFolder}/index.js",
-      "args": ["test"]
+			"name": "Launch dev",
+      		"program": "${workspaceFolder}/index.js",
+      		"args": ["dev"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch dist",
+      		"program": "${workspaceFolder}/index.js",
+      		"args": ["dist"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch watch",
+      		"program": "${workspaceFolder}/index.js",
+      		"args": ["watch"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch init",
+      		"program": "${workspaceFolder}/index.js",
+      		"args": ["init"]
 		}
 	]
 }
