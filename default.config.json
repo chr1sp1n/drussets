@@ -1,0 +1,9 @@
+{
+	"path":{
+		"temp": "./.tmp",
+		"dev": 	"./themes/custom/theme_name/libraries",
+		"dist": "./themes/custom/theme_name/libraries",
+		"js": 	"./libraries",		
+		"sass": "./libraries"
+	}
+}
