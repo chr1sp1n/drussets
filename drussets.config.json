@@ -5,5 +5,15 @@
 		"dist": "./themes/custom/theme_name/libraries",
 		"js": 	"./libraries",		
 		"sass": "./libraries"
+	},
+	"js":{
+		"babel":{
+			"config":{
+				"presets": [ 
+					"@babel/env", {}
+				]
+			},
+			"exclude": []
+		}
 	}
 }

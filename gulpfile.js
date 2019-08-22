@@ -10,10 +10,9 @@ gulp.task("public:init", tasks.init.config);
 gulp.task("js:dev", tasks.js.dev);
 gulp.task("public:dev", 
 	gulp.series(
-		'js:dev'
+		'js:dev'		
 	)
 );
-
 
 var checkConfig = function(){
 	var basePath = process.cwd();
