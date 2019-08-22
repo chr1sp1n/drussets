@@ -17,6 +17,7 @@ module.exports = function(done){
 
 	gulp.task('watching', function(done){
 		notifier.log('Watching folder: ' + basePath);
+		done();
 	});
 
 	const task = watch( 
@@ -31,12 +32,9 @@ module.exports = function(done){
 		notifier.log('Watching folder: ' + basePath);
 	})	
 	.on('change', function( path, stats ) {
-		console.clear();		
+		console.clear();
 		notifier.log('Changed file:  ' + path);		
 	})
-	// .on('all', function(){
-	// 	console.clear();
-	// })
 	.on('error', function(error){
 		notifier.error('Watch error:  ' + error);		
 		done();
