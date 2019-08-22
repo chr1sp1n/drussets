@@ -2,18 +2,25 @@
 	"path":{
 		"temp": "./.tmp",
 		"dev": 	"./themes/custom/theme_name/libraries",
-		"dist": "./themes/custom/theme_name/libraries",
-		"js": 	"./libraries",		
-		"sass": "./libraries"
+		"dist": "./themes_dist/custom/theme_name/libraries"
+	},
+	"css":{
+		"src": "./libraries",
+		"sass":{
+			"exclude": []		
+		}
 	},
 	"js":{
+		"src": 	"./libraries",
 		"babel":{
 			"config":{
 				"presets": [ 
 					"@babel/env", {}
 				]
 			},
-			"exclude": []
+			"exclude": [
+				"jquery/**/*.js"
+			]
 		}
 	}
 }

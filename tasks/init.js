@@ -13,7 +13,7 @@ module.exports = {
 
 	config: function(done){
 		if( pathExists.sync( path.join( configPath, 'drussets.config.json' ) ) ){
-			notifier.warning('[WARN] Configuration file aready exists: ' + path.join( configPath, 'drussets.config.json' ));		
+			notifier.warning('Configuration file aready exists: ' + path.join( configPath, 'drussets.config.json' ));		
 			done();
 			return;
 		}
@@ -21,12 +21,12 @@ module.exports = {
 			.pipe( rename( 'drussets.config.json' ) )
 			.pipe( gulp.dest( configPath ) )
 			.on('error', function(){				
-				notifier.log('[ERRO] Configuration file creation fail (' + path.join( configPath, 'drussets.config.json' ) + ')');
+				notifier.log('Configuration file creation fail (' + path.join( configPath, 'drussets.config.json' ) + ')');
 				done(error);
 				return;
 			})
 			.on('end', function(){				
-				notifier.log('[INFO] Configuration file created in: ' + path.join( configPath, 'drussets.config.json' ));				
+				notifier.log('Configuration file created in: ' + path.join( configPath, 'drussets.config.json' ));				
 				done();
 			})
 	}
