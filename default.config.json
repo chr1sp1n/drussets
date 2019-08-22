@@ -5,8 +5,8 @@
 		"dist": "../themes_dist/custom/theme_name/libraries"
 	},
 	"css":{
+		"src": "./libraries",
 		"sass":{
-			"src": "./libraries",
 			"exclude": []		
 		}
 	},
