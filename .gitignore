@@ -2,3 +2,4 @@ node_modules
 .tmp
 /libraries
 /themes
+/drussets.config.json

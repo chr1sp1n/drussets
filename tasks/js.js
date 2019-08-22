@@ -6,10 +6,10 @@ const path = require('path');
 const babel = require('gulp-babel');
 const notifier = require('./notifier');
 
-const config = require( path.join( basePath, '/drussets.config.json' ) );
-
 module.exports = {
 	dev: function(done){
+		const config = require( path.join( basePath, '/drussets.config.json' ) );
+
 		var src = [ path.join( basePath, config.path.js ) + '/**/*.js' ];
 		config.js.babel.exclude.forEach( element => {
 			src.push( '!' + path.join( basePath, config.path.js, element ) );
