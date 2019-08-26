@@ -10,7 +10,8 @@ module.exports = function(done){
 
 	var files = [ 
 		path.join( basePath, config.css.src ) + '/**/*',
-		'!' + path.join( basePath, config.css.src, 'css' ) + '/**/*' 
+		'!' + path.join( basePath, config.css.src, 'css' ) + '/**/*',
+		'!' + path.join( basePath, config.css.src, 'js' ) + '/**/*' 
 	];
 
 	var task = src( files )

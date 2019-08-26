@@ -14,7 +14,7 @@ gulp.task( "js:excluded", tasks.js.excluded );
 gulp.task( "deploy:dev", tasks.deploy.dev );
 gulp.task( "deploy:dist", tasks.deploy.dist );
 gulp.task( "success", tasks.success );
-gulp.task( "css:assets", tasks.assets );
+gulp.task( "assets", tasks.assets );
 
 // dev
 gulp.task("js:dev", tasks.js.dev);
@@ -27,7 +27,7 @@ gulp.task("public:dev",
 			'js:dev',
 			'js:excluded',			
 			'sass:dev',
-			'css:assets'
+			'assets'
 		),
 		'deploy:dev',
 		'success'
