@@ -44,7 +44,7 @@ gulp.task("public:dist",
 			'js:dev',
 			'js:excluded',			
 			'sass:dist',
-			'css:assets'
+			'assets'
 		),
 		'deploy:dist',
 		'success'
