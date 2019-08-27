@@ -8,10 +8,12 @@ const { src, dest } = require('gulp');
 module.exports = function(done){
 	const config = require( path.join( basePath, '/drussets.config.json' ) );
 
-	var files = [ 
+	var files = [
+		path.join( basePath, config.assets.path ) + '/**/*',
 		path.join( basePath, config.css.src ) + '/**/*',
-		'!' + path.join( basePath, config.css.src, 'css' ) + '/**/*',
-		'!' + path.join( basePath, config.css.src, 'js' ) + '/**/*' 
+		path.join( basePath, config.js.src ) + '/**/*',
+		'!' + path.join( basePath, config.css.src ) + '/**/*.scss',
+		'!' + path.join( basePath, config.css.src ) + '/**/*.js'
 	];
 
 	var task = src( files )

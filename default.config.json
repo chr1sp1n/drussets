@@ -4,14 +4,17 @@
 		"dev": 	"../themes/custom/theme_name/libraries",
 		"dist": "../themes_dist/custom/theme_name/libraries"
 	},
+	"assets":{
+		"path": "./src"
+	},
 	"css":{
-		"src": "./libraries",
+		"src": "./src/libraries",
 		"sass":{
 			"exclude": []		
 		}
 	},
 	"js":{
-		"src": 	"./libraries",
+		"src": 	"./src/libraries",
 		"babel":{
 			"config":{
 				"presets": [ 
