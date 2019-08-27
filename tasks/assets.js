@@ -10,19 +10,16 @@ module.exports = function(done){
 
 	var files = [
 		path.join( basePath, config.assets.path ) + '/**/*',
-		path.join( basePath, config.css.src ) + '/**/*',
-		path.join( basePath, config.js.src ) + '/**/*',
-		'!' + path.join( basePath, config.css.src ) + '/**/*.scss',
-		'!' + path.join( basePath, config.css.src ) + '/**/*.js'
+		'!' + path.join( basePath, config.assets.libraries ) + '/**/*',
 	];
 
 	var task = src( files )
 		.pipe( dest( path.join( basePath, config.path.temp ) ) )
 		.on('error', function(){
 			notifier.log('CSS assets error.');
-		})			
+		})
 		.on('end', function(){
-			notifier.log('CSS assets cloned.');		
+			notifier.log('CSS assets cloned.');
 		});
 
 	return task;

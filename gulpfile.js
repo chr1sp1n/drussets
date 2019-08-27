@@ -3,7 +3,6 @@ const pathExists = require('path-exists');
 const path = require('path');
 const requireDir = require('require-dir');
 const tasks = requireDir('./tasks');
-const package = require('./package.json');
 
 // init
 gulp.task("public:init", tasks.init.config);
@@ -21,12 +20,12 @@ gulp.task( "assets", tasks.assets );
 gulp.task("js:dev", tasks.js.dev);
 gulp.task("sass:dev", tasks.sass.dev);
 
-gulp.task("public:dev", 
+gulp.task("public:dev",
 	gulp.series(
 		'temp:clean',
-		gulp.parallel(			
+		gulp.parallel(
 			'js:dev',
-			'js:excluded',			
+			'js:excluded',
 			'sass:dev',
 			'assets'
 		),
@@ -38,12 +37,12 @@ gulp.task("public:dev",
 // dist
 gulp.task("js:dist", tasks.js.dist);
 gulp.task("sass:dist", tasks.sass.dist);
-gulp.task("public:dist", 
+gulp.task("public:dist",
 	gulp.series(
 		'temp:clean',
-		gulp.parallel(			
+		gulp.parallel(
 			'js:dev',
-			'js:excluded',			
+			'js:excluded',
 			'sass:dist',
 			'assets'
 		),
@@ -61,13 +60,12 @@ gulp.task("public:watch", tasks.watch);
 var checkConfig = function(){
 	var basePath = process.cwd();
 	var assetsConfigPath = path.join( basePath, 'drussets.config.json');
-	console.log('Drussets v' + package.version);
 	if( pathExists.sync( assetsConfigPath ) ){
 		console.log('Using config file: ' + assetsConfigPath);
-		return true;		
-	}else{		
-		console.log('Config file not found (' + assetsConfigPath + '). Use init task to create it.');	
-	}	
+		return true;
+	}else{
+		console.log('Config file not found (' + assetsConfigPath + '). Use init task to create it.');
+	}
 	return false;
 }
 

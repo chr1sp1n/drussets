@@ -19,19 +19,19 @@ module.exports = {
 			files.push( '!' + path.join( basePath, config.js.src, element ) );
 		});
 
-		var task = src( files, { sourcemaps: true } )
+		var task = src( files, { sourcemaps: true, base: config.js.src } )
 			//.pipe(sourcemaps.init())
 			.pipe( babel(config.js.babel.config).on('error', function(error){
 				notifier.error('JavaSctript processor fail.' + "\n" + error);
 				done();
 			}))
 			//.pipe( sourcemaps.write('.') )
-			.pipe( dest( path.join( basePath, config.path.temp ), { sourcemaps: '.' } ) )
+			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ), { sourcemaps: '.' } ) )
 			.on('error', function(){
 				notifier.log('JavaScript error.');
-			})			
+			})
 			.on('end', function(){
-				notifier.log('JavaScript compiled.');		
+				notifier.log('JavaScript compiled.');
 			});
 
 		return task;
@@ -45,18 +45,18 @@ module.exports = {
 			files.push( '!' + path.join( basePath, config.js.src, element ) );
 		});
 
-		var task = src( files )
+		var task = src( files, { base: config.js.src } )
 			.pipe( babel(config.js.babel.config).on('error', function(error){
 				notifier.error('JavaSctript processor fail.' + "\n" + error);
 				done();
 			}))
 			.pipe( uglify() )
-			.pipe( dest( path.join( basePath, config.path.temp ) ) )
+			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ) ) )
 			.on('error', function(){
 				notifier.log('JavaScript error.');
-			})		
+			})
 			.on('end', function(){
-				notifier.log('JavaScript compiled.');		
+				notifier.log('JavaScript compiled.');
 			});
 
 		return task;
@@ -70,14 +70,15 @@ module.exports = {
 			files.push( path.join( basePath, config.js.src, element ) );
 		});
 
-		var task = src( files, { base: config.js.src } )
-			.pipe( dest( path.join( basePath, config.path.temp ) ).on('error', function(){
+    var task = src( files, { base: config.js.src, base: config.js.src } )
+			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ) ).on('error', function(){
 				notifier.log('JavaScript error.');
-			}))		
+			}))
 			.on('end', function(){
 				notifier.log('JavaScript moved.');
 			});
 
 		return task;
-	}
+  }
+
 }
