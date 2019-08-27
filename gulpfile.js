@@ -3,6 +3,7 @@ const pathExists = require('path-exists');
 const path = require('path');
 const requireDir = require('require-dir');
 const tasks = requireDir('./tasks');
+const package = require('./package.json');
 
 // init
 gulp.task("public:init", tasks.init.config);
@@ -60,6 +61,7 @@ gulp.task("public:watch", tasks.watch);
 var checkConfig = function(){
 	var basePath = process.cwd();
 	var assetsConfigPath = path.join( basePath, 'drussets.config.json');
+	console.log('Drussets v' + package.version);
 	if( pathExists.sync( assetsConfigPath ) ){
 		console.log('Using config file: ' + assetsConfigPath);
 		return true;		
