@@ -11,8 +11,8 @@ module.exports = function(done){
 	const config = require( path.join( basePath, '/drussets.config.json' ) );
 
 	var folders = [ 
-		path.join( basePath , config.js.src, '/**/*' ),
-		path.join( basePath , config.css.src, '/**/*' ),
+		path.join( basePath , config.assets.path, '/**/*' ),
+		//path.join( basePath , config.css.src, '/**/*' ),
 	]
 
 	gulp.task('watching', function(done){
