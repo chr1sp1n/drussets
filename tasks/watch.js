@@ -8,17 +8,18 @@ const { watch } = require('gulp');
 const browserSync = require('browser-sync').create();
 
 
+
 module.exports = function(done){
 
 	const config = require( path.join( basePath, '/drussets.config.json' ) );
 
 	var folders = [
 		path.join( basePath , config.assets.path, '/**/*' ),
-		//path.join( basePath , config.css.src, '/**/*' ),
 	]
 
 	if( config.browser.sync ){
-		config.browser.config.files = [ config.path.dev ];
+    	config.browser.config.files = [ config.path.dev ];
+    	config.browser.config.logLevel = "silent";
 		browserSync.init( config.browser.config );
 	}
 
@@ -27,11 +28,20 @@ module.exports = function(done){
 		done();
 	});
 
+	gulp.task('browser:sync', function(done){
+		if( config.browser.sync ) {
+			browserSync.reload();
+		}
+		notifier.log('Reload request sent to browsers.');
+		done();
+	});
+
 	const task = watch(
 		folders,
 		{ cwd: __dirname },
 		gulp.series(
 			'public:dev',
+			'browser:sync',
 			'watching'
 		)
 	)
@@ -40,12 +50,17 @@ module.exports = function(done){
 		done();
 	})
 	.on('change', function( path, stats ) {
-		console.clear();
-		if( config.browser.sync ) browserSync.reload();
+    	//console.clear();
+		if( config.browser.sync ) {
+			browserSync.notify("Compiling, please wait!");
+		}
 		notifier.log('Changed file:  ' + path);
 		done();
 	})
 	.on('error', function(error){
+		if( config.browser.sync ) {
+			browserSync.notify("Drussets error!");
+		}
 		notifier.error('Watch error:  ' + error);
 		done();
 	});
