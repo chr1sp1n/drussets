@@ -9,10 +9,12 @@ module.exports = function(done){
 	const config = require( path.join( basePath, '/drussets.config.json' ) );
 
 	var files = [
-		path.join( basePath, config.assets.path ) + '/**/*',		
+		path.join( basePath, config.assets.path ) + '/**/*',
 		//'!' + path.join( basePath, config.assets.path, config.assets.libraries ) + '/**/*',
-		'!' + path.join( basePath, config.assets.path ) + '/**/js',
-		'!' + path.join( basePath, config.assets.path ) + '/**/css',
+		'!' + path.join( basePath, config.assets.path ) + '/**/js/*',
+		'!' + path.join( basePath, config.assets.path ) + '/**/css/*',
+		'!' + path.join( basePath, config.assets.path ) + '/**/js/*.js',
+		'!' + path.join( basePath, config.assets.path ) + '/**/css/*.scss',
 	];
 
 	var task = src( files )

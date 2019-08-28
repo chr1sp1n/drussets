@@ -11,14 +11,14 @@
 	"css":{
 		"src": "./src/libraries",
 		"sass":{
-			"exclude": []		
+			"exclude": []
 		}
 	},
 	"js":{
 		"src": 	"./src/libraries",
 		"babel":{
 			"config":{
-				"presets": [ 
+				"presets": [
 					"@babel/env", {}
 				]
 			},
@@ -26,5 +26,8 @@
 				"jquery/**/*.js"
 			]
 		}
+	},
+	"browser":{
+		"sync": true
 	}
 }
