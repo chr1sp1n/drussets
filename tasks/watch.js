@@ -18,9 +18,8 @@ module.exports = function(done){
 	]
 
 	if( config.browser.sync ){
-		browserSync.init({
-			files: [ config.path.dev ]
-		});
+		config.browser.config.files = [ config.path.dev ];
+		browserSync.init( config.browser.config );
 	}
 
 	gulp.task('watching', function(done){
@@ -42,11 +41,8 @@ module.exports = function(done){
 	})
 	.on('change', function( path, stats ) {
 		console.clear();
+		if( config.browser.sync ) browserSync.reload();
 		notifier.log('Changed file:  ' + path);
-		if( config.browser.sync ){
-			notifier.log('Browser reloaded.');
-			browserSync.reload();
-		}
 		done();
 	})
 	.on('error', function(error){

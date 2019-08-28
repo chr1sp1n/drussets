@@ -28,6 +28,10 @@
 		}
 	},
 	"browser":{
-		"sync": true
+		"sync": true,
+		"config": {
+			"browser": "google chrome",
+			"reloadDebounce": 500
+		}
 	}
 }
