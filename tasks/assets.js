@@ -18,12 +18,21 @@ module.exports = function(done){
 	];
 
 	var task = src( files )
-		.pipe( dest( path.join( basePath, config.path.temp ) ) )
+		.pipe(
+			dest( path.join( basePath, config.path.temp ) )
+				.on('error', function(){
+					notifier.error('Assets error.');
+					fail = 'ASSETS';
+					done();
+				})
+		)
 		.on('error', function(){
-			notifier.log('CSS assets error.');
+			notifier.error('Assets error.');
+			fail = 'ASSETS';
+			done();
 		})
 		.on('end', function(){
-			notifier.log('CSS assets cloned.');
+			notifier.log('Assets cloned.');
 		});
 
 	return task;

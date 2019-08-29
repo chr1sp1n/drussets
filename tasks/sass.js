@@ -29,6 +29,8 @@ module.exports = {
 			.pipe(
 				sass().on( 'error', function(error){
 					notifier.error('SASS error: ' + error);
+					fail = 'SASS';
+					done();
 				})
 			)
 			.pipe(
@@ -38,19 +40,21 @@ module.exports = {
 				])
 			)
 			.pipe(
-				dest(  path.join( basePath, config.path.temp, config.assets.libraries ) , { sourcemaps: '.' } ).on('error', function(error){
-					notifier.log('SASS error: ' + error);
-				}).on('error', function(){
-          notifier.log('SASS error.');
-        })
+				dest(  path.join( basePath, config.path.temp, config.assets.libraries ) , { sourcemaps: '.' } )
+					.on('error', function(error){
+						notifier.error('SASS error: ' + error);
+						fail = 'SASS';
+						done();
+					})
 			)
 			.on('error', function(){
-        notifier.log('SASS error.');
-        done();
+				notifier.error('SASS error.');
+				fail = 'SASS';
+				done();
 			})
 			.on('end', function(){
-        notifier.log('SASS compiled.');
-        done();
+				notifier.log('SASS compiled.');
+				done();
 			});
 
 		return task;
@@ -73,6 +77,8 @@ module.exports = {
 			.pipe(
 				sass().on( 'error', function(error){
 					notifier.error('SASS error: ' + error);
+					fail = 'SASS';
+          			done();
 				})
 			)
 			.pipe(
@@ -82,12 +88,17 @@ module.exports = {
 				])
 			)
 			.pipe(
-				dest(  path.join( basePath, config.path.temp, config.assets.libraries ) , { sourcemaps: '.' } ).on('error', function(error){
-					notifier.log('SASS error: ' + error);
-				})
+				dest(  path.join( basePath, config.path.temp, config.assets.libraries ) , { sourcemaps: '.' } )
+					.on('error', function(error){
+						notifier.log('SASS error: ' + error);
+						fail = 'SASS';
+						done();
+					})
 			)
 			.on('error', function(){
 				notifier.log('SASS error.');
+				fail = 'SASS';
+				done();
 			})
 			.on('end', function(){
 				notifier.log('SASS compiled.');

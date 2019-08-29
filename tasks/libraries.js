@@ -11,6 +11,13 @@ module.exports = function(done){
 	const config = require( path.join( basePath, '/drussets.config.json' ) );
 
 	var libraries = config.js.libraries;
+	var count = Object.keys(libraries).length;
+
+	if(count == 0) {
+		done();
+		return;
+	}
+
 	Object.keys(libraries).forEach(function(library, index) {
 
 	var files = [];
@@ -25,11 +32,13 @@ module.exports = function(done){
 		dest( destFolder )
 			.on('error', function(){
 				notifier.error('JavaScript library ' + colors.green(library) + ' error.');
+				fail = 'LIBRARIES';
 				done();
 			})
 		)
 		.on('error', function(){
 			notifier.error('JavaScript library ' + colors.green(library) + ' error.');
+			fail = 'LIBRARIES';
 			done();
 		})
 		.on('end', function(){

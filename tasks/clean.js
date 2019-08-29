@@ -19,12 +19,17 @@ module.exports = {
 		}
 
 		var task = src( tempPath, { read: false } )
-			.pipe( clean({force: true}).on('error',function(error){
-				notifier.error('Clean error.' + "\n" + error);
-				done();
-			}))
+			.pipe(
+				clean({force: true})
+					.on('error',function(error){
+						notifier.error('Clean error.' + "\n" + error);
+						fail = 'CLEAN';
+						done();
+					})
+			)
 			.on('error', function(){
 				notifier.error('Clean error.');
+				fail = 'CLEAN';
 				done();
 			})
 			.on('end', function(){

@@ -23,12 +23,22 @@ module.exports = {
 			//.pipe(sourcemaps.init())
 			.pipe( babel(config.js.babel.config).on('error', function(error){
 				notifier.error('JavaSctript processor fail.' + "\n" + error);
+				fail = 'JS';
 				done();
 			}))
 			//.pipe( sourcemaps.write('.') )
-			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ), { sourcemaps: '.' } ) )
+			.pipe(
+				dest( path.join( basePath, config.path.temp, config.assets.libraries ), { sourcemaps: '.' } )
+					.on('error', function(){
+						notifier.error('JavaSctript processor fail.' + "\n" + error);
+						fail = 'JS';
+						done();
+					})
+			)
 			.on('error', function(){
 				notifier.log('JavaScript error.');
+				fail = 'JS';
+				done();
 			})
 			.on('end', function(){
 				notifier.log('JavaScript compiled.');
@@ -48,12 +58,22 @@ module.exports = {
 		var task = src( files, { base: config.js.src } )
 			.pipe( babel(config.js.babel.config).on('error', function(error){
 				notifier.error('JavaSctript processor fail.' + "\n" + error);
+				fail = 'JS';
 				done();
 			}))
 			.pipe( uglify() )
-			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ) ) )
+			.pipe(
+				dest( path.join( basePath, config.path.temp, config.assets.libraries ) )
+					.on('error', function(){
+						notifier.error('JavaSctript processor fail.' + "\n" + error);
+						fail = 'JS';
+						done();
+					})
+			)
 			.on('error', function(){
 				notifier.log('JavaScript error.');
+				fail = 'JS';
+				done();
 			})
 			.on('end', function(){
 				notifier.log('JavaScript compiled.');
@@ -71,9 +91,14 @@ module.exports = {
 		});
 
     var task = src( files, { base: config.js.src, base: config.js.src } )
-			.pipe( dest( path.join( basePath, config.path.temp, config.assets.libraries ) ).on('error', function(){
-				notifier.log('JavaScript error.');
-			}))
+			.pipe(
+				dest( path.join( basePath, config.path.temp, config.assets.libraries ) )
+					.on('error', function(){
+						notifier.log('JavaScript error.');
+						fail = 'JS';
+						done();
+					})
+			)
 			.on('end', function(){
 				notifier.log('JavaScript moved.');
 			});

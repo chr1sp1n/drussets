@@ -4,11 +4,17 @@ const path = require('path');
 const requireDir = require('require-dir');
 const tasks = requireDir('./tasks');
 
+global.fail = false;
+
 // init
 gulp.task("public:init", tasks.init.config);
 
 
 // common tasks
+gulp.task( "start", function(done){
+	fail = false;
+	done();
+})
 gulp.task( "temp:clean", tasks.clean.clean );
 gulp.task( "js:excluded", tasks.js.excluded );
 gulp.task( "libraries", tasks.libraries );
@@ -23,6 +29,7 @@ gulp.task("sass:dev", tasks.sass.dev);
 
 gulp.task("public:dev",
 	gulp.series(
+		'start',
 		'temp:clean',
 		gulp.parallel(
 			'js:dev',
@@ -41,6 +48,7 @@ gulp.task("js:dist", tasks.js.dist);
 gulp.task("sass:dist", tasks.sass.dist);
 gulp.task("public:dist",
 	gulp.series(
+		'start',
 		'temp:clean',
 		gulp.parallel(
 			'js:dev',
