@@ -46,7 +46,8 @@ module.exports = function(done){
 		)
 	)
 	.on('ready', function() {
-		notifier.log('Watching folder: ' + basePath);
+		var wf = path.join(basePath, config.assets.path);
+		notifier.log('Watching folder: ' + wf );
 		done();
 	})
 	.on('change', function( path, stats ) {

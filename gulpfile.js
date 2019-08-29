@@ -11,6 +11,7 @@ gulp.task("public:init", tasks.init.config);
 // common tasks
 gulp.task( "temp:clean", tasks.clean.clean );
 gulp.task( "js:excluded", tasks.js.excluded );
+gulp.task( "libraries", tasks.libraries );
 gulp.task( "deploy:dev", tasks.deploy.dev );
 gulp.task( "deploy:dist", tasks.deploy.dist );
 gulp.task( "success", tasks.success );
@@ -27,7 +28,8 @@ gulp.task("public:dev",
 			'js:dev',
 			'js:excluded',
 			'sass:dev',
-			'assets'
+			'assets',
+			'libraries'
 		),
 		'deploy:dev',
 		'success'
@@ -44,7 +46,8 @@ gulp.task("public:dist",
 			'js:dev',
 			'js:excluded',
 			'sass:dist',
-			'assets'
+			'assets',
+			'libraries'
 		),
 		'deploy:dist',
 		'success'

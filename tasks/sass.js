@@ -40,13 +40,17 @@ module.exports = {
 			.pipe(
 				dest(  path.join( basePath, config.path.temp, config.assets.libraries ) , { sourcemaps: '.' } ).on('error', function(error){
 					notifier.log('SASS error: ' + error);
-				})
+				}).on('error', function(){
+          notifier.log('SASS error.');
+        })
 			)
 			.on('error', function(){
-				notifier.log('SASS error.');
+        notifier.log('SASS error.');
+        done();
 			})
 			.on('end', function(){
-				notifier.log('SASS compiled.');
+        notifier.log('SASS compiled.');
+        done();
 			});
 
 		return task;
