@@ -16,6 +16,7 @@
 	},
 	"js":{
 		"src": 	"./src/libraries",
+		"libraries": {},
 		"babel":{
 			"config":{
 				"presets": [
