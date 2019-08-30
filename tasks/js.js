@@ -86,11 +86,17 @@ module.exports = {
 		const config = require( path.join( basePath, '/drussets.config.json' ) );
 
 		var files = [ '!' + path.join( basePath, config.js.src ) + '/**/*.js' ];
+
+		if( config.js.babel.exclude && config.js.babel.exclude.length == 0 ) {
+			done();
+			return;
+		}
+
 		config.js.babel.exclude.forEach( element => {
 			files.push( path.join( basePath, config.js.src, element ) );
 		});
 
-    var task = src( files, { base: config.js.src, base: config.js.src } )
+   		 var task = src( files, { base: config.js.src, base: config.js.src } )
 			.pipe(
 				dest( path.join( basePath, config.path.temp, config.assets.libraries ) )
 					.on('error', function(){
