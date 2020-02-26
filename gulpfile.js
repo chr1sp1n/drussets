@@ -51,7 +51,7 @@ gulp.task("public:dist",
 		'start',
 		'temp:clean',
 		gulp.parallel(
-			'js:dev',
+			'js:dist',
 			'js:excluded',
 			'sass:dist',
 			'assets',
