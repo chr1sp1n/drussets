@@ -55,7 +55,7 @@ module.exports = {
 			files.push( '!' + path.join( basePath, config.js.src, element ) );
 		});
 
-		var task = src( files, { base: config.js.src } )
+		var task = src( files, { sourcemaps: false, base: config.js.src } )
 			.pipe( babel(config.js.babel.config).on('error', function(error){
 				notifier.error('JavaSctript processor fail.' + "\n" + error);
 				fail = 'JS';
@@ -96,7 +96,7 @@ module.exports = {
 			files.push( path.join( basePath, config.js.src, element ) );
 		});
 
-   		 var task = src( files, { base: config.js.src, base: config.js.src } )
+   		 var task = src( files, { sourcemaps: false, base: config.js.src, base: config.js.src } )
 			.pipe(
 				dest( path.join( basePath, config.path.temp, config.assets.libraries ) )
 					.on('error', function(){
