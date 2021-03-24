@@ -73,7 +73,7 @@ module.exports = {
 			files.push( '!' + path.join( basePath, config.css.src, element ) );
 		});
 
-		var task = src( files, { sourcemaps: true, base: config.css.src } )
+		var task = src( files, { sourcemaps: false, base: config.css.src } )
 			.pipe(
 				sass().on( 'error', function(error){
 					notifier.error('SASS error: ' + error);
